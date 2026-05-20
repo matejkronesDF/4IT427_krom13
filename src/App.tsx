@@ -8,6 +8,7 @@ function App() {
   
   return (
   <>
+    <h1>Films Watchlist</h1>
     {films.map((film) => (
       <FilmCard
         key={film.id}
