@@ -1,7 +1,7 @@
 {
-  "semi": true,         // strednik na konci radku
-  "singleQuote": true,  // jednoduche uvozovky
-  "tabWidth": 2,        // 2 mezery misto tabu
+  "semi": true,       
+  "singleQuote": true,  
+  "tabWidth": 2,        
   "trailingComma": "es5",
   "printWidth": 100
 }
