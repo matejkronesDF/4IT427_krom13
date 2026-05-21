@@ -1,14 +1,15 @@
 interface FilmCardProps {
-  key: string;
+  id: string;
   title: string;
   year: number;
   genre: string;
   rating: number;
   watched: boolean;
-  onToggleWatched: (title: string) => void;
+  onToggleWatched: (id: string) => void;
+  onRemove: (id: string) => void;
 }
 
-function FilmCard({ title, year, genre, rating, watched, onToggleWatched }: FilmCardProps) {
+function FilmCard({ id, title, year, genre, rating, watched, onToggleWatched, onRemove }: FilmCardProps) {
   const isRatingValid = rating >= 1 && rating <= 10;
 
   return (
@@ -18,7 +19,8 @@ function FilmCard({ title, year, genre, rating, watched, onToggleWatched }: Film
       <p>Žánr: {genre}</p>
       {isRatingValid ? <p>⭐️ {rating}</p> : <p>❌ Invalid</p>}
       {watched ? <p>✅ Zhlédnuto</p> : <p>❌ Nezhlédnuto</p>}
-      <button onClick={() => onToggleWatched(title)}>Změnit stav zhlédnutí</button>
+      <button onClick={() => onToggleWatched(id)}>Změnit stav zhlédnutí</button>
+      <button onClick={() => onRemove(id)}>Odebrat</button>
     </>
   );
 }
