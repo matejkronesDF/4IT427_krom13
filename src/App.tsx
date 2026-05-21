@@ -1,5 +1,5 @@
 import FilmCard from './components/FilmCard';
-import { type Film } from './types/Film';
+import { type Film } from './types/film.types';
 import { useWatchList } from './hooks/useWatchList';
 
 function App() {

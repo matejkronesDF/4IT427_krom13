@@ -1,4 +1,4 @@
-import { type Film } from '@/types/Film';
+import { type Film } from '@/types/film.types';
 import { useState, useEffect } from 'react';
 
 export function useWatchList(initialFilms: Film[]) {
