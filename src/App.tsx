@@ -16,7 +16,7 @@ function App() {
       <button onClick={markAllAsWatched}>Mark all as watched</button>
       {films.map((film) => (
         <FilmCard
-          id={film.id}
+          key={film.id}
           title={film.title}
           year={film.year}
           genre={film.genre}

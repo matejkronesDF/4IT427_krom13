@@ -1,5 +1,5 @@
 interface FilmCardProps {
-  id: string;
+  key: string;
   title: string;
   year: number;
   genre: string;
