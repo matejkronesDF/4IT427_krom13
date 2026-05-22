@@ -23,8 +23,8 @@ function FilmCard({
   return (
     <div
       className={`p-4 rounded-xl shadow-sm border transition flex justify-between items-center
-      ${watched ? "bg-green-50 border-green-200" : "bg-white border-gray-200 dark:bg-gray-200"}
-      hover:shadow-md`}
+      ${watched ? "bg-green-50 border-green-200 hover:shadow-md dark:hover:shadow-white" : "bg-white border-gray-200 dark:bg-gray-200 hover:shadow-md dark:hover:shadow-white"}
+      `}
     >
       {/* Left side */}
       <div>
