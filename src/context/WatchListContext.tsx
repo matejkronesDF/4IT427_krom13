@@ -37,17 +37,20 @@ export function WatchListProvider({ children }: { children: ReactNode }) {
     setFilms((prevFilms) => prevFilms.map((film) => ({ ...film, watched: true })));
   }
 
-  function watchNumbers(){
+  function watchNumbers() {
     const watchedCount = films.filter((f) => f.watched).length;
     const totalCount = films.length;
-    return `${watchedCount}/${totalCount} zhlédnuto.`
+    if(films.length === 0){
+      return "Watchlist is empty.";
+    }
+    return `${watchedCount}/${totalCount} movies seen.`;
   }
 
   useEffect(() => {
     const watchedCount = films.filter((f) => f.watched).length;
     const totalCount = films.length;
 
-    document.title = `Watchlist (${watchedCount}/${totalCount}) zhlédnuto.`;
+    document.title = `Watchlist (${watchedCount}/${totalCount}) seen.`;
   }, [films]);
 
   return (
