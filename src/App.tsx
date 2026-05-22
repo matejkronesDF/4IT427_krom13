@@ -17,7 +17,7 @@ function App() {
               onClick={() => setDarkMode(!darkMode)}
               className="mb-4 px-4 py-2 rounded-lg border
                     bg-white text-black
-                    dark:bg-gray-800 dark:text-white dark:border"
+                    dark:bg-gray-800 dark:text-white"
             >
               {darkMode ? '☀️ Light Mode' : '🌙 Dark Mode'}
             </button>
