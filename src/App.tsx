@@ -1,55 +1,63 @@
-/* Stylingová metoda: Tailwind */
+/* Stylingová metoda: Tailwind
+*/
+import { NavLink, Route, Routes } from 'react-router-dom';
+import NotFoundPage from './pages/NotFoundPage';
+import { MainPage } from './pages/MainPage';
 import { useState } from 'react';
-import AddFilmForm from './components/AddFilmForm';
-import FilmCard from './components/FilmCard';
-import { useWatchList } from './context/WatchListContext';
+import { StatsPage } from './pages/StatsPage';
 
 function App() {
-  const { films, toggleWatched, markAllAsWatched, removeFilm, watchNumbers } = useWatchList();
   const [darkMode, setDarkMode] = useState(false);
   return (
     <div className={darkMode ? 'dark' : ''}>
       <div className="min-h-screen bg-gray-100 text-gray-900 p-6 dark:bg-black dark:text-white">
         <div className="max-w-3xl mx-auto">
-          <div className="flex justify-between items-center">
-            <h1 className="text-3xl font-bold mb-2 dark:text-white">🎬 Films Watchlist</h1>
+          <nav className="flex items-center justify-between mb-6 p-4 bg-white rounded-xl shadow-sm dark:bg-gray-900">
+            <div className="flex items-center gap-4">
+              <NavLink
+                to="/"
+                end
+                className={({ isActive }) =>
+                  `px-3 py-1 rounded-lg transition font-medium
+         ${
+           isActive
+             ? 'bg-black text-white dark:bg-white dark:text-black'
+             : 'text-gray-700 hover:bg-gray-200 dark:text-gray-300 dark:hover:bg-gray-800'
+         }`
+                }
+              >
+                My Watchlist
+              </NavLink>
+
+              <NavLink
+                to="/stats"
+                className={({ isActive }) =>
+                  `px-3 py-1 rounded-lg transition font-medium
+         ${
+           isActive
+             ? 'bg-black text-white dark:bg-white dark:text-black'
+             : 'text-gray-700 hover:bg-gray-200 dark:text-gray-300 dark:hover:bg-gray-800'
+         }`
+                }
+              >
+                Watchlist statistics
+              </NavLink>
+            </div>
+
             <button
               onClick={() => setDarkMode(!darkMode)}
-              className="mb-4 px-4 py-2 rounded-lg border
-                    bg-white text-black
-                    dark:bg-gray-800 dark:text-white"
+              className="ml-auto px-4 py-2 rounded-lg border transition
+               bg-white text-black hover:bg-gray-100
+               dark:bg-gray-800 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700"
             >
-              {darkMode ? '☀️ Light Mode' : '🌙 Dark Mode'}
+              {darkMode ? '☀️ Light' : '🌙 Dark'}
             </button>
-          </div>
-
-          <h2 className="text-lg text-gray-600 mb-4 dark:text-white">{watchNumbers()}</h2>
-
-          <div className="flex justify-between items-center mb-6">
-            <button
-              onClick={markAllAsWatched}
-              className="px-4 py-2 bg-black text-white rounded-lg hover:bg-gray-800 transition dark:bg-gray-200 dark:text-black dark:hover:bg-green-300"
-            >
-              Mark all as watched
-            </button>
-            <AddFilmForm/>
-          </div>
-
-          <div className="space-y-3 dark:text-black">
-            {films.map((film) => (
-              <FilmCard
-                key={film.id}
-                id={film.id}
-                title={film.title}
-                year={film.year}
-                genre={film.genre}
-                rating={film.rating}
-                watched={film.watched}
-                onToggleWatched={toggleWatched}
-                onRemove={removeFilm}
-              />
-            ))}
-          </div>
+          </nav>
+          <Routes>
+            <Route path="/" element={<MainPage />} />
+            <Route path="/stats" element={<StatsPage />} />
+            <Route path="*" element={<NotFoundPage />} />
+          </Routes>
         </div>
       </div>
     </div>
