@@ -1,7 +1,6 @@
 /* Stylingová metoda: Tailwind
 */
-import { NavLink, Route, Routes } from 'react-router-dom';
-import NotFoundPage from './pages/NotFoundPage';
+import { Navigate, NavLink, Route, Routes } from 'react-router-dom';
 import { MainPage } from './pages/MainPage';
 import { useState } from 'react';
 import { StatsPage } from './pages/StatsPage';
@@ -56,7 +55,7 @@ function App() {
           <Routes>
             <Route path="/" element={<MainPage />} />
             <Route path="/stats" element={<StatsPage />} />
-            <Route path="*" element={<NotFoundPage />} />
+            <Route path="*" element={<Navigate to="/"/>} />
           </Routes>
         </div>
       </div>
