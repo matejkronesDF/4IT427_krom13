@@ -1,4 +1,5 @@
 import type { Film } from '@/types/film.types';
+import { useQuery } from '@tanstack/react-query';
 import { createContext, useContext, useEffect, useState, type ReactNode } from 'react';
 
 type WatchListContextType = {
@@ -8,16 +9,29 @@ type WatchListContextType = {
   toggleWatched: (id: string) => void;
   markAllAsWatched: () => void;
   watchNumbers: () => string;
+  isLoading: boolean;
+  isError: boolean;
 };
 const WatchListContext = createContext<WatchListContextType | null>(null);
-const initialFilms: Film[] = [
-  { id: '1', title: 'Inception', year: 2010, genre: 'Sci-Fi', rating: 9, watched: true },
-  { id: '2', title: 'The Matrix', year: 1999, genre: 'Sci-Fi', rating: 8, watched: false },
-  { id: '3', title: 'Interstellar', year: 2014, genre: 'Sci-Fi', rating: 9, watched: true },
-];
 
 export function WatchListProvider({ children }: { children: ReactNode }) {
-  const [films, setFilms] = useState<Film[]>(initialFilms);
+  const {
+    data: serverFilms,
+    isLoading,
+    isError,
+  } = useQuery({
+    queryKey: ['films'], // klíč cache – unikátní identifikátor dotazu
+    queryFn: () => fetch('/films.json').then((r) => r.json() as Promise<Film[]>),
+    staleTime: 60_000, // přepíše global default
+  });
+
+  const [films, setFilms] = useState<Film[]>([]);
+
+  useEffect(() => {
+    if (serverFilms) {
+      setFilms(serverFilms);
+    }
+  }, [serverFilms]);
 
   function addFilm(film: Film) {
     setFilms((prevFilms) => [...prevFilms, film]);
@@ -55,7 +69,16 @@ export function WatchListProvider({ children }: { children: ReactNode }) {
 
   return (
     <WatchListContext.Provider
-      value={{ films, addFilm, removeFilm, toggleWatched, markAllAsWatched, watchNumbers }}
+      value={{
+        films,
+        addFilm,
+        removeFilm,
+        toggleWatched,
+        markAllAsWatched,
+        watchNumbers,
+        isLoading,
+        isError,
+      }}
     >
       {children}
     </WatchListContext.Provider>

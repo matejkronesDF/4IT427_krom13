@@ -3,7 +3,10 @@ import AddFilmForm from '../components/AddFilmForm';
 import FilmCard from '../components/FilmCard';
 
 export function MainPage() {
-  const { films, toggleWatched, markAllAsWatched, removeFilm, watchNumbers } = useWatchList();
+  const { films, toggleWatched, markAllAsWatched, removeFilm, watchNumbers, isLoading, isError } =
+    useWatchList();
+  if (isLoading) return <div>Loading...</div>;
+  if (isError) return <div>Error in loading.</div>;
 
   return (
     <div className="mb-6 p-4 bg-white rounded-xl shadow-sm dark:bg-gray-900">
