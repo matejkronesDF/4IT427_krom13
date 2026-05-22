@@ -1,5 +1,5 @@
 /* Stylingová metoda: Tailwind
-*/
+ */
 import { Navigate, NavLink, Route, Routes } from 'react-router-dom';
 import { MainPage } from './pages/MainPage';
 import { useState } from 'react';
@@ -55,7 +55,7 @@ function App() {
           <Routes>
             <Route path="/" element={<MainPage />} />
             <Route path="/stats" element={<StatsPage />} />
-            <Route path="*" element={<Navigate to="/"/>} />
+            <Route path="*" element={<Navigate to="/" />} />
           </Routes>
         </div>
       </div>

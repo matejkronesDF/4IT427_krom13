@@ -40,8 +40,8 @@ export function WatchListProvider({ children }: { children: ReactNode }) {
   function watchNumbers() {
     const watchedCount = films.filter((f) => f.watched).length;
     const totalCount = films.length;
-    if(films.length === 0){
-      return "Watchlist is empty.";
+    if (films.length === 0) {
+      return 'Watchlist is empty.';
     }
     return `${watchedCount}/${totalCount} movies seen.`;
   }

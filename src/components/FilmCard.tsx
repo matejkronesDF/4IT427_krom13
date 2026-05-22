@@ -19,11 +19,11 @@ function FilmCard({
   onToggleWatched,
   onRemove,
 }: FilmCardProps) {
-  const validRating = rating >=1 && rating <= 10;
+  const validRating = rating >= 1 && rating <= 10;
   return (
     <div
       className={`p-4 rounded-xl shadow-sm border transition flex justify-between items-center
-      ${watched ? "bg-green-50 border-green-200 hover:shadow-md dark:hover:shadow-white" : "bg-white border-gray-200 dark:bg-gray-200 hover:shadow-md dark:hover:shadow-white"}
+      ${watched ? 'bg-green-50 border-green-200 hover:shadow-md dark:hover:shadow-white' : 'bg-white border-gray-200 dark:bg-gray-200 hover:shadow-md dark:hover:shadow-white'}
       `}
     >
       {/* Left side */}
@@ -39,7 +39,7 @@ function FilmCard({
         </div>
 
         <p className="text-sm text-gray-500">
-          {year} • {genre} • {validRating ? `⭐ ${rating}/10` : "❌ Chybný rating"}
+          {year} • {genre} • {validRating ? `⭐ ${rating}/10` : '❌ Chybný rating'}
         </p>
       </div>
 
@@ -50,11 +50,11 @@ function FilmCard({
           className={`px-3 py-1 rounded-lg text-sm transition
             ${
               watched
-                ? "bg-yellow-100 text-yellow-700 hover:bg-yellow-200"
-                : "bg-blue-100 text-blue-700 hover:bg-blue-200"
+                ? 'bg-yellow-100 text-yellow-700 hover:bg-yellow-200'
+                : 'bg-blue-100 text-blue-700 hover:bg-blue-200'
             }`}
         >
-          {watched ? "Unwatch" : "Watch"}
+          {watched ? 'Unwatch' : 'Watch'}
         </button>
 
         <button
