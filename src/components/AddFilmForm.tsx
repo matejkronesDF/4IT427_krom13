@@ -2,18 +2,14 @@ import { useWatchList } from '@/context/WatchListContext';
 import { Dialog, DialogPanel } from '@headlessui/react';
 import { useState } from 'react';
 
-type Props = {
-  isOpen: boolean;
-  onClose: () => void;
-};
-
-export function AddFilmForm({ isOpen, onClose }: Props) {
+export function AddFilmForm() {
   const { addFilm } = useWatchList();
 
   const [title, setTitle] = useState('');
   const [year, setYear] = useState('');
   const [genre, setGenre] = useState('');
   const [rating, setRating] = useState('');
+  const [isOpen, setIsOpen] = useState(false);
 
   function handleSubmit(e: React.SubmitEvent) {
     e.preventDefault();
@@ -34,11 +30,18 @@ export function AddFilmForm({ isOpen, onClose }: Props) {
     setGenre('');
     setRating('');
 
-    onClose();
+    setIsOpen(false);
   }
 
   return (
-    <Dialog open={isOpen} onClose={onClose}>
+    <>
+    <button
+              onClick={() => setIsOpen(true)}
+              className="px-4 py-2 bg-black text-white rounded-lg hover:bg-gray-800 transition dark:bg-gray-200 dark:text-black dark:hover:bg-gray-400"
+            >
+              Add film
+            </button>
+    <Dialog open={isOpen} onClose={() => setIsOpen(false)}>
       <div className="fixed inset-0 flex items-center justify-center bg-black/30">
         <DialogPanel>
           <form onSubmit={handleSubmit} className="bg-white p-6 rounded-xl shadow space-y-4">
@@ -86,6 +89,7 @@ export function AddFilmForm({ isOpen, onClose }: Props) {
         </DialogPanel>
       </div>
     </Dialog>
+    </>
   );
 }
 

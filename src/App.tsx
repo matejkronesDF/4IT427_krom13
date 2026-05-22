@@ -7,7 +7,6 @@ import { useWatchList } from './context/WatchListContext';
 function App() {
   const { films, toggleWatched, markAllAsWatched, removeFilm, watchNumbers } = useWatchList();
   const [darkMode, setDarkMode] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
   return (
     <div className={darkMode ? 'dark' : ''}>
       <div className="min-h-screen bg-gray-100 text-gray-900 p-6 dark:bg-black dark:text-white">
@@ -33,13 +32,7 @@ function App() {
             >
               Mark all as watched
             </button>
-
-            <button
-              onClick={() => setIsOpen(true)}
-              className="px-4 py-2 bg-black text-white rounded-lg hover:bg-gray-800 transition dark:bg-gray-200 dark:text-black dark:hover:bg-gray-400"
-            >
-              Add film
-            </button>
+            <AddFilmForm/>
           </div>
 
           <div className="space-y-3 dark:text-black">
@@ -57,8 +50,6 @@ function App() {
               />
             ))}
           </div>
-
-          <AddFilmForm isOpen={isOpen} onClose={() => setIsOpen(false)} />
         </div>
       </div>
     </div>
